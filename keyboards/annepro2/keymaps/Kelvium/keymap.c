@@ -47,3 +47,21 @@ const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_LCTL, KC_LGUI, KC_LALT, KC_SPC, KC_RALT, _______, KC_RGUI, KC_RCTL),
 };
 // clang-format on
+
+bool caps_word_press_user(uint16_t keycode)
+{
+	switch (keycode) {
+	case KC_A ... KC_Z:
+	case KC_MINS:
+	case KC_SCLN: // real guys call it an o. ooooooooooooooooo
+		add_weak_mods(MOD_BIT(KC_LSFT));
+		return true;
+	case KC_1 ... KC_0:
+	case KC_BSPC:
+	case KC_DEL:
+	case KC_UNDS:
+		return true;
+	default:
+		return false;
+	}
+}
